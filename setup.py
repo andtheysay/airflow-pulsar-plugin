@@ -8,6 +8,7 @@ setup(
     install_requires=[
         "apache-airflow>=2.0.0",
         "pulsar-client>=2.7.0",
+        'grpcio>=1.27.0',
     ],
     author="andtheysay",
     author_email="andtheysay@protonmail.ch",
