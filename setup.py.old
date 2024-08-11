@@ -7,8 +7,8 @@ setup(
     package_dir={"": "src"},
     install_requires=[
         "apache-airflow>=2.0.0",
-        "pulsar-client>=2.7.0",
-        'grpcio>=1.27.0',
+        "pulsar-client>=3.5.0",
+        'grpcio>=1.65.2',
     ],
     author="andtheysay",
     author_email="andtheysay@protonmail.ch",

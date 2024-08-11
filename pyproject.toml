@@ -1,0 +1,28 @@
+[tool.poetry]
+
+name = "airflow-pulsar-plugin"
+version = "0.1.0"
+description = "An Apache Airflow plugin for Apache Pulsar integration"
+authors = ["andtheysay <andtheysay@protonmail.ch>"]
+license = "Apache License 2.0"
+readme = "README.md"
+homepage = "https://github.com/andtheysay/airflow-pulsar-plugin"
+packages = [{ include = "airflow_pulsar_plugin", from = "src" }]
+
+[tool.poetry.dependencies]
+
+python = "^3.9"
+apache-airflow = "^2.0.0"
+pulsar-client = "^3.5.0"
+grpcio = "^1.65.2"
+
+[build-system]
+
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.build]
+
+script = "build.py"
+generate-setup-file = true
+
