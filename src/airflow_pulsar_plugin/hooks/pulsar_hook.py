@@ -2,15 +2,19 @@ from airflow.hooks.base import BaseHook
 import pulsar
 
 class PulsarHook(BaseHook):
-    def __init__(self, pulsar_conn_id='pulsar_default'):
+    def __init__(self, pulsar_url=None, pulsar_conn_id='pulsar_default'):
         super().__init__()
+        self.pulsar_url = pulsar_url
         self.pulsar_conn_id = pulsar_conn_id
         self.client = None
 
     def get_conn(self):
         if self.client is None:
-            conn = self.get_connection(self.pulsar_conn_id)
-            pulsar_url = f"pulsar://{conn.host}:{conn.port}"
+            if self.pulsar_url:
+                pulsar_url = self.pulsar_url
+            else:
+                conn = self.get_connection(self.pulsar_conn_id)
+                pulsar_url = f"pulsar://{conn.host}:{conn.port}"
             self.client = pulsar.Client(pulsar_url)
         return self.client
 

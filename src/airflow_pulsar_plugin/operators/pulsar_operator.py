@@ -8,6 +8,7 @@ class PulsarOperator(BaseOperator):
         self,
         topic,
         message,
+        pulsar_url=None,
         pulsar_conn_id='pulsar_default',
         *args,
         **kwargs
@@ -15,9 +16,10 @@ class PulsarOperator(BaseOperator):
         super().__init__(*args, **kwargs)
         self.topic = topic
         self.message = message
+        self.pulsar_url = pulsar_url
         self.pulsar_conn_id = pulsar_conn_id
 
     def execute(self, context):
-        hook = PulsarHook(pulsar_conn_id=self.pulsar_conn_id)
+        hook = PulsarHook(pulsar_url=self.pulsar_url, pulsar_conn_id=self.pulsar_conn_id)
         hook.send_message(self.topic, self.message)
         hook.close_connection()

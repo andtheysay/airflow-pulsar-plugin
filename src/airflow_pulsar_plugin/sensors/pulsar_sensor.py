@@ -7,7 +7,7 @@ class PulsarSensor(BaseSensorOperator):
     def __init__(
         self,
         topic,
-        pulsar_conn_id='pulsar_default',
+        pulsar_url,
         poke_interval=60,
         timeout=60*60,  # 1 hour
         *args,
@@ -15,12 +15,12 @@ class PulsarSensor(BaseSensorOperator):
     ):
         super().__init__(poke_interval=poke_interval, timeout=timeout, *args, **kwargs)
         self.topic = topic
-        self.pulsar_conn_id = pulsar_conn_id
+        self.pulsar_url = pulsar_url
         self.hook = None
 
     def poke(self, context):
         if not self.hook:
-            self.hook = PulsarHook(pulsar_conn_id=self.pulsar_conn_id)
+            self.hook = PulsarHook(pulsar_url=self.pulsar_url)
         
         client = self.hook.get_conn()
         consumer = client.subscribe(self.topic, "airflow-sensor-subscription")
