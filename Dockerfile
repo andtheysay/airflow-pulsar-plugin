@@ -15,9 +15,7 @@ RUN pip3 install --no-cache-dir \
     pycouchdb
 
 # Copy pulsar files
-COPY src/airflow_pulsar_plugin/operators/pulsar_operator.py /opt/airflow/include/custom_operators/
-COPY src/airflow_pulsar_plugin/hooks/pulsar_hook.py /opt/airflow/include/custom_hooks/
-COPY src/airflow_pulsar_plugin/sensors/pulsar_sensor.py /opt/airflow/include/custom_sensors/
+COPY src/airflow_pulsar_plugin/ /opt/airflow/include/
 
 # Set env variable PYTHONPATH to /opt/airflow/include
 ENV PYTHONPATH "/opt/airflow/include"
