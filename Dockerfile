@@ -13,4 +13,4 @@ RUN pip3 install --no-cache-dir \
 COPY src/airflow_pulsar_plugin/ /opt/airflow/include/
 
 # Set env variable PYTHONPATH to /opt/airflow/include
-ENV PYTHONPATH "/opt/airflow/include"
+ENV PYTHONPATH "/opt/airflow/include/"
