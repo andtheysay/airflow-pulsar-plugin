@@ -1,6 +1,6 @@
 from airflow.utils.decorators import apply_defaults
 from airflow.models import BaseOperator
-from pulsar_hook import PulsarHook
+from hooks.pulsar_hook import PulsarHook
 
 class PulsarOperator(BaseOperator):
     @apply_defaults

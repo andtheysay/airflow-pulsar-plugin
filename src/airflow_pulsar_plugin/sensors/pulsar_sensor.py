@@ -1,6 +1,6 @@
 from airflow.sensors.base import BaseSensorOperator
 from airflow.utils.decorators import apply_defaults
-from airflow_pulsar_plugin.hooks.pulsar_hook import PulsarHook
+from hooks.pulsar_hook import PulsarHook
 
 class PulsarSensor(BaseSensorOperator):
     @apply_defaults
