@@ -11,7 +11,8 @@ RUN pip3 install --no-cache-dir \
     scdl \
     osrsreboxed \
     numpy \
-    pulsar-client[all]
+    pulsar-client[all] \
+    pycouchdb
 
 # Copy pulsar files
 COPY src/airflow_pulsar_plugin/operators/pulsar_operator.py /opt/airflow/include/custom_operators/
