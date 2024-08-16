@@ -1,10 +1,9 @@
-name: Create Release
+name: Create Release on Master Push
 
 on:
   push:
-    tags:
-      - 'v*'
-
+    branches:
+      - main
 jobs:
   create-release:
     runs-on: ubuntu-latest
@@ -14,14 +13,21 @@ jobs:
     - name: Create tar.gz
       run: tar -czf airflow-pulsar-plugin.tar.gz -C src airflow_pulsar_plugin
 
+    - name: Generate release tag
+      id: tag
+      run: |
+        sha_short=$(git rev-parse --short HEAD)
+        ts=$(date +"%Y%m%d%H%M%S")
+        echo "::set-output name=release_tag::release-${ts}-${sha_short}"
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        release_name: Release ${{ steps.tag.outputs.release_tag }}
         draft: false
         prerelease: false
 
@@ -32,5 +38,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./airflow-pulsar-plugin.tar.gz
-        asset_name: airflow-pulsar-plugin-${{ github.ref_name }}.tar.gz
+        asset_name: airflow-pulsar-plugin-${{ steps.tag.outputs.release_tag }}.tar.gz
         asset_content_type: application/gzip
