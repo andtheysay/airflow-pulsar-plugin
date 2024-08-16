@@ -20,4 +20,4 @@ COPY src/airflow_pulsar_plugin/hooks/pulsar_hook.py /opt/airflow/include/custom_
 COPY src/airflow_pulsar_plugin/sensors/pulsar_sensor.py /opt/airflow/include/custom_sensors/
 
 # Set env variable PYTHONPATH to /opt/airflow/include
-ENV PYTHONPATH "${PYTHONPATH}:/opt/airflow/include"
+ENV PYTHONPATH "/opt/airflow/include"
